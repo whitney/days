@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "Deploying newest days-service..."
+
+if [ $USER == root ]
+then
+	echo "It's cheating to run as root, please run as deploy."
+    echo " "
+	exit 1
+fi
+
+bin/server-stop
+
+echo "Pulling the latest..."
+git pull origin master
+
+bin/server-start

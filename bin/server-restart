@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "Restarting auth-service..."
+
+if [ $USER == root ]
+then
+	echo "It's cheating to run as root, please run as deploy."
+    echo " "
+	exit 1
+fi
+
+bin/server-stop
+bin/server-start

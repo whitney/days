@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Starting server..."
+
+if [ $USER == root ]
+then
+	echo "It's cheating to run as root, please run as deploy."
+    echo " "
+	exit 1
+fi
+
+mvn clean compile package -DskipTests
+nohup java -server -Xms1024m -Xmx1536m -XX:MaxPermSize=128m -jar target/auth-service-1.0.0-SNAPSHOT.jar &
+
+echo "Server started."

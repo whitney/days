@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "Stopping server..."
+
+if [ $USER == root ]
+then
+	echo "It's cheating to run as root, please run as deploy."
+    echo " "
+	exit 1
+fi
+
+PID=`ps -fu $USER | grep java | grep auth-service | awk '{FS=" "}{print $2}'`
+if [ -n "$PID" ]
+then
+        echo "Killing DropWizard PID on [$PID]"
+        kill $PID
+        sleep 10
+fi
+
+echo "Server stopped."
